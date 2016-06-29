@@ -1,0 +1,15 @@
+USE Appi18n
+GO
+
+IF (NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES 
+				 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'Note'))
+BEGIN
+	CREATE TABLE dbo.Note (
+	    [Id]     INT         IDENTITY (1, 1) NOT NULL,
+	    [Name]   NVARCHAR(255) NULL,
+	    [Text]   NVARCHAR(MAX) NULL,
+	    [Date]	 DATETIME DEFAULT GETDATE(),
+	    CONSTRAINT [PK_Skater] PRIMARY KEY CLUSTERED ([Id] ASC)
+	);
+END
