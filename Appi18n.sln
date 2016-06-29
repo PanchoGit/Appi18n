@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{251DBE64-E895-4002-8CB6-416F05C52F00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appi18n.Web", "src\ui\Appi18n.Web\Appi18n.Web.csproj", "{BD84814A-7653-40BA-BAC3-DFF2A34CDC2C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{867C5062-D0DB-447F-A74C-E07D4CAD308F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appi18n.Application", "src\app\Appi18n.Application\Appi18n.Application.csproj", "{3ABAD396-6D2B-4891-8BA8-53FD3B44444F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD84814A-7653-40BA-BAC3-DFF2A34CDC2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD84814A-7653-40BA-BAC3-DFF2A34CDC2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD84814A-7653-40BA-BAC3-DFF2A34CDC2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD84814A-7653-40BA-BAC3-DFF2A34CDC2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ABAD396-6D2B-4891-8BA8-53FD3B44444F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ABAD396-6D2B-4891-8BA8-53FD3B44444F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ABAD396-6D2B-4891-8BA8-53FD3B44444F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ABAD396-6D2B-4891-8BA8-53FD3B44444F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BD84814A-7653-40BA-BAC3-DFF2A34CDC2C} = {251DBE64-E895-4002-8CB6-416F05C52F00}
+		{3ABAD396-6D2B-4891-8BA8-53FD3B44444F} = {867C5062-D0DB-447F-A74C-E07D4CAD308F}
+	EndGlobalSection
+EndGlobal
