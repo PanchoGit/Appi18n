@@ -2,8 +2,10 @@
 
 namespace Appi18n.Application.Data
 {
-    public interface IRepositoryBase<out T> where T : class
+    public interface IRepositoryBase<T> where T : class
     {
         IEnumerable<T> GetAll();
+
+        T Save(T item);
     }
 }

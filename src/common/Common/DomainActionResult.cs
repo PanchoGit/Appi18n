@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 
-namespace Appi18n.Web.Models
+namespace Common
 {
     public class DomainActionResult : IHttpActionResult
     {
@@ -49,7 +49,7 @@ namespace Appi18n.Web.Models
         /// <param name="request">The request message which led to this result.</param>
         protected DomainActionResult(HttpRequestMessage request)
         {
-            Request = request;
+            this.Request = request;
 
             //CreateResponse = System.Net.Http.HttpRequestMessageExtensions.CreateResponse;
         }
@@ -92,7 +92,7 @@ namespace Appi18n.Web.Models
             : this(request)
         {
             // TODO: completar la transformación del model state en IEnumerable<ValidationIssue>
-            var issues =
+            IEnumerable<ValidationResult> issues =
                 modelState.Select(err => new ValidationResult(err.Value.Errors.First().ErrorMessage));
 
             Result = new Result();
@@ -130,7 +130,7 @@ namespace Appi18n.Web.Models
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
-            var responseData = Result.HasErrors
+            object responseData = Result.HasErrors
                 ? new { Data = new { Result.Errors, Success = false } }
                 : GetContentsFromResult<object>();
 
@@ -155,9 +155,9 @@ namespace Appi18n.Web.Models
             {
                 // to be able to get the value as any base type we need to use reflection
                 // as we cant cast the property to Result<BaseType> as if we were using covariance.
-                const string contentProperty = "Data";
+                const string ContentProperty = "Data";
 
-                var content = t.GetProperty(contentProperty).GetValue(Result);
+                object content = t.GetProperty(ContentProperty).GetValue(Result);
 
                 return (TContent)content;
             }

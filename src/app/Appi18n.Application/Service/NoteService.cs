@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Appi18n.Application.Data;
 using Appi18n.Application.Model;
+using Common;
 
 namespace Appi18n.Application.Service
 {
@@ -13,9 +15,14 @@ namespace Appi18n.Application.Service
             this.data = data;
         }
 
-        public IEnumerable<Note> GetAll()
+        public Result GetAll()
         {
-            return data.GetAll();
+            return new Result<IEnumerable<Note>>(data.GetAll());
+        }
+
+        public Result Save(Note item)
+        {
+            return new Result<Note>(data.Save(item));
         }
     }
 }

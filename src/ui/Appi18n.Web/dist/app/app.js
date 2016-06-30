@@ -1,3 +1,8 @@
+moment.locale("es");
+console.log("moment.locale = " + moment.locale());
+var locale = window.navigator.userLanguage || window.navigator.language;
+console.log("locale = " + locale);
+
 var appVue = new Vue({
     el: '#app',
     data: function() {
@@ -10,13 +15,15 @@ var appVue = new Vue({
                 name: '',
                 text: '',
                 date: ''
-            }
+            },
+            timeZoneOffset: (new Date().getTimezoneOffset() / 60) * (-1)
         }
     },
     ready: function () {
         this.showView(this.currentViewName);
+        this.initializeControls();
         this.getNotes();
-        $('.datepicker').datepicker();
+        $('#inputDate').datetimepicker();
     },
     methods: {
         showView: function (name) {
@@ -45,19 +52,13 @@ var appVue = new Vue({
         goHomeClick:function() {
             this.showView("home");
         },
-        getNotes: function () {
+        initializeControls: function () {
             var self = this;
-            $.ajax({
-                url: '/api/Note/GetAll',
-                success: function (data) {
-                    self.setNotesControl(data);
-                }
-            });
             $("#grid-selection").bootgrid({
                 navigation: 0,
                 selection: true,
                 rowSelect: false,
-                multiSelect:false
+                multiSelect: false
             }).on("selected.rs.jquery.bootgrid", function (e, rows) {
                 $("#grid-selection").bootgrid("deselect", [self.lastRowId]);
                 var item;
@@ -68,18 +69,55 @@ var appVue = new Vue({
                 }
                 if (item != null && item.id > 0) {
                     self.rowSelected = true;
-                    self.noteEditModel = item;
                     self.lastRowId = item.id;
+                    self.setNoteEditModel(item);
                 }
             }).on("deselected.rs.jquery.bootgrid", function () {
                 self.rowSelected = false;
             });
         },
+        getNotes: function () {
+            var self = this;
+            self.lastRowId = 0;
+            self.rowSelected = false;
+            $.ajax({
+                url: '/api/Note/GetAll',
+                success: function (data) {
+                    self.setNotesControl(data);
+                }
+            });
+        },
+        setNoteEditModel: function (item) {
+            this.noteEditModel.id = item.id;
+            this.noteEditModel.name = item.name;
+            this.noteEditModel.text = item.text;
+            $('#inputDate').data('DateTimePicker').locale(moment.locale());
+            var date = new Date(item.date);
+            $('#inputDate').data('DateTimePicker').date(date);
+        },
         setNotesControl: function (data) {
+            $("#grid-selection").bootgrid("clear");
             $("#grid-selection").bootgrid("append", data);
         },
         editNote: function () {
             this.showView("edit");
+        },
+        saveNote: function () {
+            var date = $('#inputDate').data('DateTimePicker').date().utc().format();
+            this.noteEditModel.date = date;
+
+            var self = this;
+            $.ajax({
+                url: '/api/Note',
+                type: "post",
+                contentType: 'application/json',
+                data: JSON.stringify(this.noteEditModel),
+                'dataType': 'json',
+                success: function () {
+                    self.getNotes();
+                    self.goHomeClick();
+                }
+            });
         }
     }
 });

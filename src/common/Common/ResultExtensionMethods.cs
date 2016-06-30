@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Http;
-using Appi18n.Web.Models;
 
-namespace Appi18n.Web.Extensions
+namespace Common
 {
     public static class ResultExtensionMethods
     {
@@ -16,7 +15,6 @@ namespace Appi18n.Web.Extensions
         {
             var validationResults = new List<ValidationResult>();
             Validator.TryValidateObject(model, new ValidationContext(model), validationResults, true);
-
             return validationResults;
         }
     }

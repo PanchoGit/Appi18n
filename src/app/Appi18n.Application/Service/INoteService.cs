@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using Appi18n.Application.Model;
+﻿using Appi18n.Application.Model;
+using Common;
 
 namespace Appi18n.Application.Service
 {
     public interface INoteService
     {
-        IEnumerable<Note> GetAll();
+        Result GetAll();
+
+        Result Save(Note item);
     }
 }

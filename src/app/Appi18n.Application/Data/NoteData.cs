@@ -16,5 +16,10 @@ namespace Appi18n.Application.Data
         {
             return repositaryBase.GetAll();
         }
+
+        public Note Save(Note item)
+        {
+            return repositaryBase.Save(item);
+        }
     }
 }

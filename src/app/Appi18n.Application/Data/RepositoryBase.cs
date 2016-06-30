@@ -16,5 +16,15 @@ namespace Appi18n.Application.Data
         {
             return Session.CreateCriteria<T>().List<T>();
         }
+
+        public T Save(T item)
+        {
+            using (var session = Session)
+            {
+                session.SaveOrUpdate(item);
+                session.Flush();
+            }
+            return item;
+        }
     }
 }

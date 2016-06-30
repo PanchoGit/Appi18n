@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Web.Http;
 using Appi18n.Application.Model;
 using Appi18n.Application.Service;
-using Appi18n.Web.Extensions;
-using Appi18n.Web.Models;
+using Common;
 
 namespace Appi18n.Web.Controllers.Api
 {
@@ -19,7 +18,17 @@ namespace Appi18n.Web.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            var result = new Result<IEnumerable<Note>>(service.GetAll());
+            var result = service.GetAll();
+
+            return result.CreateResponse(this);
+        }
+
+        [HttpPost]
+        public IHttpActionResult Save(Note model)
+        {
+            //model.Date = model.Date.ToUniversalTime();
+
+            var result = service.Save(model);
 
             return result.CreateResponse(this);
         }

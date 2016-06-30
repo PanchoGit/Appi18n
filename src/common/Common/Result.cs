@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace Appi18n.Web.Models
+namespace Common
 {
     public class Result
     {
@@ -42,13 +42,9 @@ namespace Appi18n.Web.Models
         }
     }
 
-    /// <summary>
-    ///     Result of a particular operation that also generates an output value.
-    /// </summary>
-    /// <typeparam name="T">Type of result</typeparam>
-    public class Result<T> : Result
+    public sealed class Result<T> : Result
     {
-        #region Constructors
+        public T Data { get; set; }
 
         public Result()
         {
@@ -58,9 +54,5 @@ namespace Appi18n.Web.Models
         {
             Data = data;
         }
-
-        #endregion Constructors
-
-        public virtual T Data { get; set; }
     }
 }
