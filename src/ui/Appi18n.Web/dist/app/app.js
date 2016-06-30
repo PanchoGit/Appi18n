@@ -3,17 +3,20 @@ var appVue = new Vue({
     data: function() {
         return {
             currentViewName: 'home',
+            lastRowId:0,
             rowSelected: false,
             noteEditModel: {
                 id: 0,
                 name: '',
-                text: ''
+                text: '',
+                date: ''
             }
         }
     },
     ready: function () {
         this.showView(this.currentViewName);
         this.getNotes();
+        $('.datepicker').datepicker();
     },
     methods: {
         showView: function (name) {
@@ -53,14 +56,22 @@ var appVue = new Vue({
             $("#grid-selection").bootgrid({
                 navigation: 0,
                 selection: true,
-                rowSelect: true
+                rowSelect: false,
+                multiSelect:false
             }).on("selected.rs.jquery.bootgrid", function (e, rows) {
-                var item = rows[0];
-                if (item.id > 0) {
-                    self.rowSelected = true;
+                $("#grid-selection").bootgrid("deselect", [self.lastRowId]);
+                var item;
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i] !== self.lastRowId) {
+                        item = rows[i];
+                    }
                 }
-                self.noteEditModel = item;
-            }).on("deselected.rs.jquery.bootgrid", function (e, rows) {
+                if (item != null && item.id > 0) {
+                    self.rowSelected = true;
+                    self.noteEditModel = item;
+                    self.lastRowId = item.id;
+                }
+            }).on("deselected.rs.jquery.bootgrid", function () {
                 self.rowSelected = false;
             });
         },
