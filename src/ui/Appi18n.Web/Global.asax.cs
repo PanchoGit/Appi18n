@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Appi18n.Web.Helpers;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
@@ -22,6 +23,8 @@ namespace Appi18n.Web
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            ControllerBuilder.Current.SetControllerFactory(new DefaultControllerFactory(new CultureControllerActivator()));
         }
     }
 }
