@@ -433,10 +433,24 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localization\Resources.de-DE.resx" />
-    <EmbeddedResource Include="Localization\Resources.en-US.resx" />
-    <EmbeddedResource Include="Localization\Resources.es-AR.resx" />
-    <EmbeddedResource Include="Localization\Resources.fr-CH.resx" />
+    <EmbeddedResource Include="Localization\Resources.ar-SA.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Resources.de-DE.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Resources.en-US.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Resources.es-AR.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Resources.fr-CH.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Resources.ja-JP.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

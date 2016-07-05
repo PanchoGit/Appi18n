@@ -8,7 +8,7 @@ namespace Appi18n.UnitTest
     public class DateTimeTest
     {
         [Fact]
-        public void UtcNoOffestTest()
+        public void UtcOffestValueTest()
         {
             var timeZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
 
@@ -61,12 +61,10 @@ namespace Appi18n.UnitTest
         }
 
         [Fact]
-        public void DateWithCulture()
+        public void DateParsedWithCultureTest()
         {
             var cultureinfo = new CultureInfo("fr-CH");
             var format = "yyyy-MM-dd'T'hh:mm:ss'Z'"; //ISO8601 
-
-            Thread.CurrentThread.CurrentCulture = cultureinfo;
 
             var date1 = DateTime.Parse("2016-06-26T10:34:00", cultureinfo);
             var date2 = DateTime.Parse("2016-06-26T10:34:00Z", cultureinfo);
